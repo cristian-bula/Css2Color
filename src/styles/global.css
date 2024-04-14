@@ -1,0 +1,48 @@
+html,
+body {
+  scroll-behavior: smooth;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+}
+
+@media (width <= 1024px) {
+    .layout-padding {
+      padding-right: 5%;
+      padding-left: 5%;
+    }
+  }
+  @media (width > 1024px) {
+    .layout-padding {
+      padding-right: 10%;
+      padding-left: 10%;
+    }
+  }
+  
+  @media (width >= 1280px) {
+    .layout-padding {
+      padding-right: 10%;
+      padding-left: 10%;
+    }
+  }
+  
+  @media (width >= 1536px) {
+    .layout-padding {
+      padding-right: 20%;
+      padding-left: 20%;
+    }
+  }
+  
+
+
+body {
+  font-family: "JetBrains Mono Variable", monospace;
+}
+

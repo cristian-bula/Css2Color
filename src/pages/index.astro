@@ -1,16 +1,126 @@
 ---
+import { Button, Input, Snippet } from "@nextui-org/react";
+import BackGround from "../components/BackGround.astro";
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+import { NAME } from "../constants/commons";
 
+const ColorPickerClass = 'p-1 h-10 w-14 block bg-white border border-gray-200 cursor-pointer rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700'
+const InputClass = 'w-64 h-10 mr-4 p-2 rounded-lg outline-none bg-[#f3f3f4] dark:bg-[#2b2b2f] hover:bg-[#e4e4e7] hover:dark:bg-[#3f3f46] transition-all'
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={NAME}>
+  <BackGround />
+  <Navbar />
+  <div class="flex flex-col layout-padding mt-12 w-full">
+    <h1 class="text-lightWhite dark:text-darkBlack text-3xl text-center mb-12">
+      {NAME}
+    </h1>
+    <p class="mb-12">
+      The "{NAME}" is a tool that simplifies the creation of visual effects on
+      HTML elements such as images, text or icons. You only need to specify two
+      colors: one target color (the color you want to highlight or modify) and
+      one based color (as a reference point). The tool automatically generates
+      the CSS code needed to apply the desired filter, allowing you to easily
+      customize the look of your website.
+    </p>
+
+    <div class="flex flex-col md:flex-row">
+      <section
+        class="w-full md:w-2/4 flex flex-col justify-center items-center"
+      >
+        <div class="flex items-center">
+          <p class="w-36">Target color:</p>
+          <input
+            id="colorText"
+            class=`target ${InputClass}`
+            type="text"
+            value="#00a4d6"
+          />
+          <input
+            id="colorPicker"
+            type="color"
+            class=`target ${ColorPickerClass}`
+            value="#00a4d6"
+          />
+        </div>
+        <div class="flex items-center mt-8">
+          <p class="w-36">Base color:</p>
+          <input
+            id="baseColorText"
+            class=`base ${InputClass}`
+            type="text"
+            value="#000000"
+          />
+          <input
+            id="baseColorPicker"
+            type="color"
+            class=`base ${ColorPickerClass}`
+            value="#000000"
+          />
+        </div>
+        <div class="flex w-full mt-6">
+          <Button
+            className="execute w-fit inline-flex h-12 transition active:scale-95 mx-auto"
+            client:visible>Generate</Button
+          >
+        </div>
+        <p class="lossDetail text-center mt-4 h-14"></p>
+      </section>
+      <section class="w-full md:w-2/4 flex justify-center items-center gap-8">
+        <div class="flex flex-col items-center gap-8">
+          <span
+            class="text-9xl text-black dark:text-white icon-[fluent--emoji-meme-16-regular] realPixel"
+            role="img"
+            aria-hidden="true"></span>
+          <p class="text-center">
+            Real pixel, color applied through CSS <code>color</code>
+          </p>
+        </div>
+        <div class="flex flex-col items-center gap-8">
+          <span
+            class="text-9xl text-black dark:text-white icon-[fluent--emoji-meme-16-regular] filterPixel"
+            role="img"
+            aria-hidden="true"></span>
+          <p class="text-center">
+            Filtered pixel, color applied through CSS <code>filter</code>
+          </p>
+        </div>
+      </section>
+    </div>
+    <div class="snippet">
+      <Snippet symbol="" className="w-fit mt-16 mx-auto" client:visible
+        ><span class="filterDetail text-wrap"></span></Snippet
+      >
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import "../scripts/TargetColor.ts";
+  document.addEventListener("DOMContentLoaded", () => {
+    const colorText = document.getElementById("colorText") as HTMLInputElement;
+    const colorPicker = document.getElementById(
+      "colorPicker"
+    ) as HTMLInputElement;
+
+    function syncInputs(source: HTMLInputElement, target: HTMLInputElement) {
+      source.addEventListener("input", () => {
+        target.value = source.value;
+      });
+    }
+
+    syncInputs(colorText, colorPicker);
+    syncInputs(colorPicker, colorText);
+
+    const baseColorText = document.getElementById(
+      "baseColorText"
+    ) as HTMLInputElement;
+    const baseColorPicker = document.getElementById(
+      "baseColorPicker"
+    ) as HTMLInputElement;
+
+    syncInputs(baseColorText, baseColorPicker);
+    syncInputs(baseColorPicker, baseColorText);
+  });
+</script>
