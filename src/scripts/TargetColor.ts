@@ -345,12 +345,12 @@ class Color {
         const BasedInput = document.querySelector(
           "input.base"
         ) as HTMLInputElement;
-        const baseRgb = hexToRgb(BasedInput.value);
-        if (!baseRgb) return;
-        if (baseRgb.length !== 3) {
-          alert("Invalid format!");
-          return;
-        }
+        const baseRgb = hexToRgb(BasedInput.value) ?? [];
+          if (baseRgb.length !== 3) {
+            alert("Invalid format!");
+            return;
+          }
+        
 
         const color = new Color(rgb[0], rgb[1], rgb[2]);
         const basedColor = new Color(baseRgb[0],baseRgb[1],baseRgb[2]);
@@ -379,7 +379,8 @@ class Color {
         const filterPixels = document.querySelectorAll(".filterPixel");
         if (filterPixels){
           filterPixels.forEach(function(filterPixel) {
-            filterPixel.setAttribute("style", 'color: #000 !important');
+            // filterPixel.setAttribute("style", 'color: #000 !important');
+            filterPixel.classList.add('dark:!text-black')
             filterPixel.setAttribute("style", result.filter);
           });
         };

@@ -33,14 +33,16 @@ const InputClass = 'w-32 md:w-64 h-10 mr-4 p-2 rounded-lg outline-none bg-[#f3f3
           <p class="w-36">Target color:</p>
           <input
             id="colorText"
+            aria-label="Target color text input"
             class=`target ${InputClass}`
             type="text"
             value="#00a4d6"
           />
           <input
             id="colorPicker"
-            type="color"
+            aria-label="Target color picker input"
             class=`target ${ColorPickerClass}`
+            type="color"
             value="#00a4d6"
           />
         </div>
@@ -48,14 +50,16 @@ const InputClass = 'w-32 md:w-64 h-10 mr-4 p-2 rounded-lg outline-none bg-[#f3f3
           <p class="w-36">Base color:</p>
           <input
             id="baseColorText"
+            aria-label="Base color text input"
             class=`base ${InputClass}`
             type="text"
             value="#000000"
           />
           <input
             id="baseColorPicker"
-            type="color"
+            aria-label="Base color picker input"
             class=`base ${ColorPickerClass}`
+            type="color"
             value="#000000"
           />
         </div>

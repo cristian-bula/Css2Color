@@ -10,6 +10,7 @@ import { NAME } from "../constants/commons";
     <button
       type="button"
       id="dark"
+      aria-label="switch to light theme button"
       onclick="document.dispatchEvent(new CustomEvent('set-theme', { detail: 'light' }))"
     >
     <span class="text-3xl icon-[material-symbols--light-mode-rounded] transition-all" role="img" aria-hidden="true" />
@@ -17,6 +18,7 @@ import { NAME } from "../constants/commons";
     <button
       type="button"
       id="light"
+      aria-label="switch to dark theme button"
       onclick="document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }))"
     >
     <span class="text-3xl icon-[ri--moon-clear-fill] transition-all" role="img" aria-hidden="true" />
